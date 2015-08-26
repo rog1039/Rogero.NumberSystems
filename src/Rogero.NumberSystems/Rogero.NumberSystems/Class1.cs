@@ -48,7 +48,6 @@ namespace Rogero.NumberSystems
 
         public char ToSymbol(int ordinal)
         {
-            if (!HasZeroCharacter) ordinal--;
             return Alphabet[ordinal];
         }
 
@@ -73,6 +72,9 @@ namespace Rogero.NumberSystems
 
         public static NumberAlphabet AToA => _aToA;
         private static readonly NumberAlphabet _aToA = new NumberAlphabet("A", false);
+
+        public static NumberAlphabet AToB => _aToB;
+        private static readonly NumberAlphabet _aToB = new NumberAlphabet("AB", false);
         #endregion
     }
 
@@ -100,6 +102,7 @@ namespace Rogero.NumberSystems
         public static NumberSystem AToZ => new NumberSystem(NumberAlphabet.AToZ, "AToZ");
         public static NumberSystem ZeroToZ => new NumberSystem(NumberAlphabet.ZeroToZ, "0ToZ");
         public static NumberSystem AToA => new NumberSystem(NumberAlphabet.AToA, "AToA");
+        public static NumberSystem AToB => new NumberSystem(NumberAlphabet.AToB, "AToB");
 
         public override string ToString()
         {
@@ -145,6 +148,13 @@ namespace Rogero.NumberSystems
 
         private static Number ConvertDecimalToNumberSystem(int decimalValue, NumberSystem outputNumberSystem)
         {
+            return outputNumberSystem.NumberAlphabet.HasZeroCharacter
+                ? ConvertDecimalToZeroBasedNumberSystem(decimalValue, outputNumberSystem)
+                : ConvertDecimalToNonZeroBasedNumberSystem(decimalValue, outputNumberSystem);
+        }
+
+        private static Number ConvertDecimalToZeroBasedNumberSystem(int decimalValue, NumberSystem outputNumberSystem)
+        {
             var radix = outputNumberSystem.Radix;
             int number = decimalValue;
             int divisionResult = 0;
@@ -156,15 +166,10 @@ namespace Rogero.NumberSystems
                 moduloResult = number % radix;
                 result.Add(moduloResult);
                 number = divisionResult;
-                if (radix == 1) divisionResult--;
             }
             while (divisionResult >= outputNumberSystem.Radix);
             if (divisionResult > 0)
             {
-                if (!outputNumberSystem.NumberAlphabet.HasZeroCharacter)
-                {
-                    divisionResult--;
-                }
                 result.Add(divisionResult);
             }
 
@@ -173,5 +178,41 @@ namespace Rogero.NumberSystems
             var resultString = symbolList.Aggregate(string.Empty, (s, c) => s += c);
             return new Number(outputNumberSystem, resultString);
         }
+
+        private static Number ConvertDecimalToNonZeroBasedNumberSystem(int decimalValue, NumberSystem outputNumberSystem)
+        {
+            if (decimalValue == 0)
+                throw new ArgumentException("decimalValue cannot be zero in a non-zero based number system.");
+
+            var result = new List<int>();
+            var radix = outputNumberSystem.Radix;
+
+            int number = decimalValue-1;
+            int divisionResult = 0;
+            int moduloResult = 0;
+            do
+            {
+                divisionResult = number / radix;
+                moduloResult = number % radix;
+                result.Add(moduloResult);
+                number = divisionResult;
+                if (radix == 1) number--;
+            }
+            while (divisionResult >= outputNumberSystem.Radix);
+            if (divisionResult > 0)
+            {
+                result.Add(divisionResult);
+            }
+
+            var symbolList = result.Select((value, index) => outputNumberSystem.NumberAlphabet.ToSymbol(value)).ToList();
+            symbolList.Reverse();
+            var resultString = symbolList.Aggregate(string.Empty, (s, c) => s += c);
+            return new Number(outputNumberSystem, resultString);
+        }
+    }
+
+    public static class NonZeroBasedNumberSystemConverter
+    {
+        
     }
 }
