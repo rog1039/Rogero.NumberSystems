@@ -40,8 +40,11 @@ For a zero collapse trinary alphabet system:
 
 ##### For unique symbols at a given length:
 For a given alphabet with radix r<sub>n</sub> with length _x_:
+
 For zero-collapse, typical number systems: 
+
 For length _x_ = 1: r<sub>n</sub>
+
 For length _x_ > 1: (r<sub>n</sub>-1) * r<sub>n</sub><sup>_x_-1</sup>
 
 
