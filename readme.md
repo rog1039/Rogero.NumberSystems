@@ -44,15 +44,10 @@ For a zero collapse trinary alphabet system:
 Given an alphabet with radix r<sub>n</sub> with length _x_:
 
 ###### For zero-collapse, typical number systems: 
-
-For length _x_ = 1: r<sub>n</sub>
-
-For length _x_ > 1: (r<sub>n</sub>-1) * r<sub>n</sub><sup>_x_-1</sup>
-
+For length _x_ = 1: r<sub>n</sub>  
+For length _x_ > 1: (r<sub>n</sub>-1) * r<sub>n</sub><sup>_x_-1</sup>  
 ###### For no-collapse systems (AA-style):
-
-For any length _x_: r<sub>n</sub>
-
+For any length _x_: r<sub>n</sub>  
 
 ##### Total Number of unique symbols at a given length and lower:
 Given an alphabet with radix r<sub>n</sub> with length _x_:
