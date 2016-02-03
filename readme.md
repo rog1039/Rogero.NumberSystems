@@ -17,8 +17,11 @@ We can break this down by analyzing a given string in a language based on this z
 #### At a given string length:
 
 For non-zero collapse we get the following for a binary alphabet:
+
 1-digit = 2<sup>1</sup> = 2
+
 2-digit = 2<sup>2</sup> = 4
+
 3-digit = 2<sup>3</sup> = 8
 
 For a zero collapse binary alphabet system:
@@ -64,6 +67,8 @@ For any length _x_: r<sub>n</sub>
 ###### For no-collapse systems (AA-style):
 
 For any length _x_: Sum(r<sub>n</sub><sup>q</sup>) as q from 1..x
+
+### 
 
 
 
