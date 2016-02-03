@@ -47,8 +47,10 @@ For length _x_ = 1: r<sub>n</sub>
 
 For length _x_ > 1: (r<sub>n</sub>-1) * r<sub>n</sub><sup>_x_-1</sup>
 
+###### For no-collapse systems (AA-style):
+
+For any length _x_: r<sub>n</sub>
 
 
 
 
-We are converting a number from system X to system Y. The number in system X can be converted to decimal. From this decimal we can reduce to an equivalent number in system Y. System Y can hold r values in each position.
