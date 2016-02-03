@@ -53,13 +53,9 @@ For any length _x_: r<sub>n</sub>
 Given an alphabet with radix r<sub>n</sub> with length _x_:
 
 ###### For zero-collapse, typical number systems: 
-
-For any length _x_: r<sub>n</sub>
-
-###### For no-collapse systems (AA-style):
-
-For any length _x_: Sum(r<sub>n</sub><sup>q</sup>) as q from 1..x
-
+For any length _x_: r<sub>n</sub>  
+###### For no-collapse systems (AA-style):  
+For any length _x_: Sum(r<sub>n</sub><sup>q</sup>) as q from 1..x  
 ### 
 
 
