@@ -17,22 +17,21 @@ namespace Rogero.NumberSystems
         /// Means the first character in the alphabet is a special 'zero' character.
         /// 
         /// Exists so we can handle these two cases differently:
-        /// Decimal: 7, 8, 9, 10 -> then 11, not 01 - HasZeroCharacter = true;
-        /// A to Z : W, X, Y, Z  -> then AA, not BA - HasZeroCharacter = false;
+        /// Decimal: 7, 8, 9, 10 -> then 11, not 01 - ZeroCollapses = true; 
+        /// A to Z : W, X, Y, Z  -> then AA, not BA - ZeroCollapses = false;
+        /// 
+        /// This is because 00 collapses to 0, a char we've seen already (00 == 0). However,
+        /// AA does not collapse to A since it stands for a unique value from A (AA != A).
         /// </summary>
-        public bool HasZeroCharacter { get; set; }
+        public bool ZeroCollapses { get; set; }
 
-        public NumberAlphabet(char[] alphabet, bool hasZeroCharacter)
+        public NumberAlphabet(char[] alphabet, bool zeroCollapses)
         {
             Alphabet = alphabet;
-            HasZeroCharacter = hasZeroCharacter;
+            ZeroCollapses = zeroCollapses;
         }
 
-        public NumberAlphabet(string alphabet, bool hasZeroCharacter)
-        {
-            Alphabet = alphabet.ToCharArray();
-            HasZeroCharacter = hasZeroCharacter;
-        }
+        public NumberAlphabet(string alphabet, bool zeroCollapses) : this(alphabet.ToCharArray(), zeroCollapses) { }
 
         public int ToOrdinal(char value)
         {
@@ -148,7 +147,7 @@ namespace Rogero.NumberSystems
 
         private static Number ConvertDecimalToNumberSystem(int decimalValue, NumberSystem outputNumberSystem)
         {
-            return outputNumberSystem.NumberAlphabet.HasZeroCharacter
+            return outputNumberSystem.NumberAlphabet.ZeroCollapses
                 ? ConvertDecimalToZeroBasedNumberSystem(decimalValue, outputNumberSystem)
                 : ConvertDecimalToNonZeroBasedNumberSystem(decimalValue, outputNumberSystem);
         }
