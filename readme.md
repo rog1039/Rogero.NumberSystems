@@ -38,8 +38,8 @@ For a zero collapse trinary alphabet system:
 
 #### General Rules of Thumb
 
-##### For unique symbols at a given length:
-For a given alphabet with radix r<sub>n</sub> with length _x_:
+##### Number of unique symbols at a given length:
+Given an alphabet with radix r<sub>n</sub> with length _x_:
 
 ###### For zero-collapse, typical number systems: 
 
