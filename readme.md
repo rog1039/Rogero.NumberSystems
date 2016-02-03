@@ -27,16 +27,16 @@ For a zero collapse binary alphabet system:
 3-digit = (2-1)<sup>1</sup> * 2<sup>2</sup> = 4  
 4-digit = (2-1)<sup>1</sup> * 2<sup>3</sup> = 8  
 
-For a no-collapse trinary alphabet:
-1-digit = 3<sup>1</sup> = 3
-2-digit = 3<sup>2</sup> = 9
-3-digit = 3<sup>3</sup> = 27
+For a no-collapse trinary alphabet:  
+1-digit = 3<sup>1</sup> = 3  
+2-digit = 3<sup>2</sup> = 9  
+3-digit = 3<sup>3</sup> = 27  
 
-For a zero collapse trinary alphabet system:
-1-digit = 3<sup>1</sup> = 3
-2-digit = (3-1)<sup>1</sup> * 3<sup>1</sup> = 6
-3-digit = (3-1)<sup>1</sup> * 3<sup>2</sup> = 18
-4-digit = (3-1)<sup>1</sup> * 3<sup>3</sup> = 54
+For a zero collapse trinary alphabet system:  
+1-digit = 3<sup>1</sup> = 3  
+2-digit = (3-1)<sup>1</sup> * 3<sup>1</sup> = 6  
+3-digit = (3-1)<sup>1</sup> * 3<sup>2</sup> = 18  
+4-digit = (3-1)<sup>1</sup> * 3<sup>3</sup> = 54  
 
 #### General Rules of Thumb
 
