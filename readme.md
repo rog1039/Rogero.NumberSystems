@@ -4,7 +4,7 @@
 
 A number system is a combination of the following:
 
-### ordered set of symbols:
+### * Ordered set of symbols:
 
 Alphabet: {s<sub>1</sub>,s<sub>2</sub>,...s<sub>n</sub>}
 
