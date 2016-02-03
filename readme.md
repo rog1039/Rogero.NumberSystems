@@ -8,13 +8,13 @@ A number system is a combination of the following:
 
 Alphabet: {s<sub>1</sub>,s<sub>2</sub>,...s<sub>n</sub>}
 
-### Zero-Collapse Property
+### * Zero-Collapse Property
 
 In typical number systems the zero symbol, s<sub>1</sub>, on the left of a number does not effect its value. For instance, in a decimal based system, 00010 = 10. However, in other number system types, think the column headers in Excel or stadium seating rows, the zero symbol on the left does effect the number. For instance A != AA.
 
 We can break this down by analyzing a given string in a language based on this zero-collapse constraint. In a zero collapse number system with a radix of r<sub>n</sub>, the rightmost digit has _n_ possible values, but subsequent columns only have _r<sub>n</sub>-1_ possible values.
 
-#### * At a given string length:
+#### At a given string length:
 
 For non-zero collapse we get the following for a binary alphabet:  
 1-digit = 2<sup>1</sup> = 2  
