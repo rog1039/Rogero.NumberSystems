@@ -16,12 +16,9 @@ We can break this down by analyzing a given string in a language based on this z
 
 #### At a given string length:
 
-For non-zero collapse we get the following for a binary alphabet:
-
-1-digit = 2<sup>1</sup> = 2
-
-2-digit = 2<sup>2</sup> = 4
-
+For non-zero collapse we get the following for a binary alphabet:  
+1-digit = 2<sup>1</sup> = 2  
+2-digit = 2<sup>2</sup> = 4  
 3-digit = 2<sup>3</sup> = 8
 
 For a zero collapse binary alphabet system:  
