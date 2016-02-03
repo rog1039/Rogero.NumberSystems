@@ -26,9 +26,9 @@ For non-zero collapse we get the following for a binary alphabet:
 
 For a zero collapse binary alphabet system:
 1-digit = 2<sup>1</sup> = 2
-2-digit = (2-1)<sup>1</sup> * 2<sup>1</sup> = 2
-3-digit = (2-1)<sup>1</sup> * 2<sup>2</sup> = 4
-4-digit = (2-1)<sup>1</sup> * 2<sup>3</sup> = 8
+2-digit = (2-1)<sup>1</sup> * 2<sup>1</sup> = 2  
+3-digit = (2-1)<sup>1</sup> * 2<sup>2</sup> = 4  
+4-digit = (2-1)<sup>1</sup> * 2<sup>3</sup> = 8  
 
 For a no-collapse trinary alphabet:
 1-digit = 3<sup>1</sup> = 3
