@@ -63,7 +63,7 @@ For any length _x_: r<sub>n</sub>
 
 ###### For no-collapse systems (AA-style):
 
-For any length _x_: r<sub>n</sub>
+For any length _x_: Sum(r<sub>n</sub><sup>q</sup>) as q from 0->x-1
 
 
 
