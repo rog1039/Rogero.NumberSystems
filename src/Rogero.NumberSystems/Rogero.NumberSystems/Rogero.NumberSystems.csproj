@@ -40,8 +40,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="NumberAlphabet.cs" />
+    <Compile Include="Converter.cs" />
+    <Compile Include="FirstSymbolType.cs" />
     <Compile Include="Number.cs" />
+    <Compile Include="NumberSystem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
