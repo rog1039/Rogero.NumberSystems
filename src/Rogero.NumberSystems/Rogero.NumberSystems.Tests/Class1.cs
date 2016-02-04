@@ -64,7 +64,10 @@ namespace Rogero.NumberSystems.Tests
         [Fact]
         public void AtoZTests()
         {
-            var decimalResult = Converter.ConvertFromDecimal(26, NumberSystem.AToZ);
+            var  decimalResult = Converter.ConvertFromDecimal(26, NumberSystem.AToZ_OneIndex);
+            decimalResult.Value.Should().Be("Z");
+
+            decimalResult = Converter.ConvertFromDecimal(26, NumberSystem.AToZ_ZeroIndex);
             decimalResult.Value.Should().Be("AA");
         }
     }
@@ -79,7 +82,7 @@ namespace Rogero.NumberSystems.Tests
 
             for (int i = 0; i < input.Count; i++)
             {
-                var alpha = Converter.ConvertFromDecimal(i, NumberSystem.AToZ);
+                var alpha = Converter.ConvertFromDecimal(i, NumberSystem.AToZ_OneIndex);
                 var expected = input[i];
                 Console.WriteLine($"{i,2}) {expected} => {alpha}");
                 alpha.Value.Should().Be(expected);
@@ -92,7 +95,7 @@ namespace Rogero.NumberSystems.Tests
             var range = Enumerable.Range(0, 2000).ToList();
             for (int i = 0; i < range.Count; i++)
             {
-                var alphaValue = Converter.ConvertFromDecimal(i, NumberSystem.AToZ);
+                var alphaValue = Converter.ConvertFromDecimal(i, NumberSystem.AToZ_OneIndex);
                 Console.WriteLine($"{i,3} => {alphaValue}");
             }
         }
@@ -100,8 +103,8 @@ namespace Rogero.NumberSystems.Tests
         [Fact]
         public void HundredsTest()
         {
-            var zz = Converter.ConvertFromDecimal(26*26 - 1, NumberSystem.AToZ);
-            var aaa = Converter.ConvertFromDecimal(26 * 26, NumberSystem.AToZ);
+            var zz = Converter.ConvertFromDecimal(26 * 26 - 1, NumberSystem.AToZ_OneIndex);
+            var aaa = Converter.ConvertFromDecimal(26 * 26, NumberSystem.AToZ_OneIndex);
 
             Console.WriteLine($"26*26-1 => ZZ  ?? {zz}");
             Console.WriteLine($"26*26   => AAA ?? {aaa}");
@@ -120,6 +123,34 @@ namespace Rogero.NumberSystems.Tests
             for (int i = 0; i < range.Count; i++)
             {
                 var binary = Converter.ConvertFromDecimal(i, NumberSystem.Binary);
+                Console.WriteLine($"{i,4} => {binary}");
+            }
+        }
+
+        [Fact]
+        public void BigRangeMapNoCollapse()
+        {
+            var range = Enumerable.Range(0, 20).ToList();
+            for (int i = 0; i < range.Count; i++)
+            {
+                var binary = Converter.ConvertFromDecimal(i, NumberSystem.BinaryNoCollapse);
+                Console.WriteLine($"{i,4} => {binary}");
+            }
+            for (int i = 0; i < range.Count; i++)
+            {
+                var binary = Converter.ConvertFromDecimal(i, NumberSystem.TrinaryNoCollapse);
+                Console.WriteLine($"{i,4} => {binary}");
+            }
+        }
+
+
+        [Fact]
+        public void BigRangeMapNoCollapseTrinary()
+        {
+            var range = Enumerable.Range(0, 30).ToList();
+            for (int i = 0; i < range.Count; i++)
+            {
+                var binary = Converter.ConvertFromDecimal(i, NumberSystem.TrinaryNoCollapse);
                 Console.WriteLine($"{i,4} => {binary}");
             }
         }
@@ -153,19 +184,57 @@ namespace Rogero.NumberSystems.Tests
         }
     }
 
+    public class RandomAlphabetListings
+    {
+        [Fact()]
+        [Trait("Category", "Instant")]
+        public void Binary_Collapse_WithZero()
+        {
+            Print(NumberSystem.Binary, 0, 50);
+        }
+        [Fact()]
+        [Trait("Category", "Instant")]
+        public void Binary_NoCollapse_WithZero()
+        {
+            Print(NumberSystem.BinaryNoCollapse, 0, 50);
+        }
+
+        [Fact()]
+        [Trait("Category", "Instant")]
+        public void Trinary_Collapse_WithZero()
+        {
+            Print(NumberSystem.Trinary, 0, 50);
+        }
+        [Fact()]
+        [Trait("Category", "Instant")]
+        public void Trinary_NoCollapse_WithZero()
+        {
+            Print(NumberSystem.TrinaryNoCollapse, 0, 50);
+        }
+
+        private void Print(NumberSystem numberSystem, int start, int end)
+        {
+            for (int i = start; i < end; i++)
+            {
+                var number = Converter.ConvertFromDecimal(i, numberSystem);
+                Console.WriteLine("{0,6} {1,6}  - [{2}]", i, number.Value, number.NumberSystem.Description);
+            }
+        }
+    }
+
     public class AtoATests
     {
         [Fact]
         public void ZeroTest()
         {
-            var convertAction = new Action(() => Converter.ConvertFromDecimal(0, NumberSystem.AToA));
+            var convertAction = new Action(() => Converter.ConvertFromDecimal(0, NumberSystem.AToA_OneIndex));
             convertAction.ShouldThrow<ArgumentException>();
         }
 
         [Fact]
         public void OneTest()
         {
-            var result = Converter.ConvertFromDecimal(1, NumberSystem.AToA);
+            var result = Converter.ConvertFromDecimal(1, NumberSystem.AToA_OneIndex);
             result.Value.Should().Be("A");
         }
 
@@ -173,7 +242,7 @@ namespace Rogero.NumberSystems.Tests
         [Fact]
         public void TwoTest()
         {
-            var result = Converter.ConvertFromDecimal(2, NumberSystem.AToA);
+            var result = Converter.ConvertFromDecimal(2, NumberSystem.AToA_OneIndex);
             result.Value.Should().Be("AA");
         }
 
@@ -183,7 +252,7 @@ namespace Rogero.NumberSystems.Tests
             var range = Enumerable.Range(1, 10).ToList();
             for (int i = range.First(); i < range.Count; i++)
             {
-                var alphaValue = Converter.ConvertFromDecimal(i, NumberSystem.AToA);
+                var alphaValue = Converter.ConvertFromDecimal(i, NumberSystem.AToA_OneIndex);
                 Console.WriteLine($"{i,3} => {alphaValue}");
             }
         }
@@ -194,56 +263,56 @@ namespace Rogero.NumberSystems.Tests
         [Fact]
         public void ZeroTest()
         {
-            var convertAction = new Action(() => Converter.ConvertFromDecimal(0, NumberSystem.AToB));
+            var convertAction = new Action(() => Converter.ConvertFromDecimal(0, NumberSystem.AToB_OneIndex));
             convertAction.ShouldThrow<ArgumentException>();
         }
 
         [Fact]
         public void OneTest()
         {
-            var result = Converter.ConvertFromDecimal(1, NumberSystem.AToB);
+            var result = Converter.ConvertFromDecimal(1, NumberSystem.AToB_OneIndex);
             result.Value.Should().Be("A");
         }
         
         [Fact]
         public void TwoTest()
         {
-            var result = Converter.ConvertFromDecimal(2, NumberSystem.AToB);
+            var result = Converter.ConvertFromDecimal(2, NumberSystem.AToB_OneIndex);
             result.Value.Should().Be("B");
         }
 
         [Fact]
         public void ThreeTest()
         {
-            var result = Converter.ConvertFromDecimal(3, NumberSystem.AToB);
+            var result = Converter.ConvertFromDecimal(3, NumberSystem.AToB_OneIndex);
             result.Value.Should().Be("AA");
         }
 
         [Fact]
         public void FourTest()
         {
-            var result = Converter.ConvertFromDecimal(4, NumberSystem.AToB);
+            var result = Converter.ConvertFromDecimal(4, NumberSystem.AToB_OneIndex);
             result.Value.Should().Be("AB");
         }
 
         [Fact]
         public void FiveTest()
         {
-            var result = Converter.ConvertFromDecimal(5, NumberSystem.AToB);
+            var result = Converter.ConvertFromDecimal(5, NumberSystem.AToB_OneIndex);
             result.Value.Should().Be("BA");
         }
 
         [Fact]
         public void SixTest()
         {
-            var result = Converter.ConvertFromDecimal(6, NumberSystem.AToB);
+            var result = Converter.ConvertFromDecimal(6, NumberSystem.AToB_OneIndex);
             result.Value.Should().Be("BB");
         }
 
         [Fact]
         public void SevenTest()
         {
-            var result = Converter.ConvertFromDecimal(7, NumberSystem.AToB);
+            var result = Converter.ConvertFromDecimal(7, NumberSystem.AToB_OneIndex);
             result.Value.Should().Be("AAA");
         }
 
@@ -253,7 +322,7 @@ namespace Rogero.NumberSystems.Tests
             var range = Enumerable.Range(1, 10).ToList();
             for (int i = range.First(); i < range.Count; i++)
             {
-                var alphaValue = Converter.ConvertFromDecimal(i, NumberSystem.AToB);
+                var alphaValue = Converter.ConvertFromDecimal(i, NumberSystem.AToB_OneIndex);
                 Console.WriteLine($"{i,3} => {alphaValue}");
             }
         }
