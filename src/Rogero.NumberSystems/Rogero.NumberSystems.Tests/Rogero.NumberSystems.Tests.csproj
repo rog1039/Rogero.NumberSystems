@@ -74,6 +74,7 @@
     <Compile Include="RandomAlphabetListings.cs" />
     <Compile Include="TableParserExtensions.cs" />
     <Compile Include="TensTests.cs" />
+    <Compile Include="TimeoutAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -9,6 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rogero.NumberSystems.Tests"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A1E3C3E1-6095-4104-AFB8-221616087960}"
 	ProjectSection(SolutionItems) = preProject
+		..\..\Excel Sheet of Helpful Number Tables.xlsx = ..\..\Excel Sheet of Helpful Number Tables.xlsx
 		..\..\readme.md = ..\..\readme.md
 	EndProjectSection
 EndProject

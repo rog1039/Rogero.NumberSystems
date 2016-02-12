@@ -4,7 +4,48 @@ using System.Linq;
 
 namespace Rogero.NumberSystems
 {
-    public static class Converter
+
+    public static class NonCollapsibleToDecimalConverter
+    {
+        public static int Convert(Number number)
+        {
+            if(number.NumberSystem.FirstSymbolCollapses)
+                throw new InvalidOperationException("This converter is for numbers that are not collapsible.");
+
+            int valueAsCollapsible = GetDecimalValueAsCollapsible(number);
+            int nonCollapsiblePortion = GetNoncollapsiblePortion(number);
+
+            var value = valueAsCollapsible + nonCollapsiblePortion;
+
+            if (number.NumberSystem.FirstSymbolType == FirstSymbolType.One)
+                value++;
+
+            return value;
+        }
+
+        private static int GetNoncollapsiblePortion(Number number)
+        {
+            int raiseToPower = number.Value.Length-1;
+            if (raiseToPower == 0) return 0;
+
+            var radix = number.NumberSystem.Radix;
+            var value = 0;
+            for (int i = 1; i <= raiseToPower; i++)
+            {
+                value += (int)Math.Pow(radix, i);
+            }
+            return value;
+        }
+
+        private static int GetDecimalValueAsCollapsible(Number number)
+        {
+            var numberAsCollapsible = new Number(number.NumberSystem.InvertFirstSymbolCollapses(), number.Value);
+            var decimalValue = numberAsCollapsible.ToDecimalValue();
+            return decimalValue;
+        }
+    }
+
+    public static class NumberConverter
     {
         public static Number Convert(Number input, NumberSystem outputNumberSystem)
         {
@@ -32,14 +73,19 @@ namespace Rogero.NumberSystems
         
         private static int ConvertNumberToDecimal(string inputValue, NumberSystem inputNumberSystem)
         {
-            if(!inputNumberSystem.FirstSymbolCollapses || inputNumberSystem.FirstSymbolType == FirstSymbolType.One)
-                throw new NotImplementedException("Don't have this supported yet.");
-
-            var reversedInputValue = inputValue.Reverse();
-            int decimalValue = reversedInputValue
-                .Select((ch, index) => GetDecimalValueOfCharacter(inputNumberSystem, index, ch))
-                .Sum();
-            return decimalValue;
+            if (inputNumberSystem.FirstSymbolCollapses)
+            {
+                var reversedInputValue = inputValue.Reverse();
+                int decimalValue = reversedInputValue
+                    .Select((ch, index) => GetDecimalValueOfCharacter(inputNumberSystem, index, ch))
+                    .Sum();
+                return decimalValue;
+            }
+            else
+            {
+                var result = NonCollapsibleToDecimalConverter.Convert(new Number(inputNumberSystem, inputValue));
+                return result;
+            }
         }
 
         private static int GetDecimalValueOfCharacter(NumberSystem inputNumberSystem, int index, char ch)
@@ -53,11 +99,11 @@ namespace Rogero.NumberSystems
         private static Number ConvertDecimalToNumberSystem(int decimalValue, NumberSystem outputNumberSystem)
         {
             return outputNumberSystem.FirstSymbolCollapses
-                ? ConvertDecimalToCollapsableNumberSystem(decimalValue, outputNumberSystem)
-                : ConvertDecimalToNonCollapsableNumberSystem(decimalValue, outputNumberSystem);
+                ? ConvertDecimalToCollapsibleNumberSystem(decimalValue, outputNumberSystem)
+                : ConvertDecimalToNonCollapsibleNumberSystem(decimalValue, outputNumberSystem);
         }
 
-        private static Number ConvertDecimalToNonCollapsableNumberSystem(int decimalValue, NumberSystem outputNumberSystem)
+        private static Number ConvertDecimalToNonCollapsibleNumberSystem(int decimalValue, NumberSystem outputNumberSystem)
         {
             if (outputNumberSystem.FirstSymbolType == FirstSymbolType.One)
                 decimalValue--;
@@ -73,8 +119,8 @@ namespace Rogero.NumberSystems
                 sumOfPowers = newSumOfPowers;
                 iteration++;
             }
-            var equivalentSymbolInCollapsableSystem = decimalValue - sumOfPowers;
-            var newNumber = ConvertDecimalToCollapsableNumberSystem(equivalentSymbolInCollapsableSystem, outputNumberSystem);
+            var equivalentSymbolInCollapsibleSystem = decimalValue - sumOfPowers;
+            var newNumber = ConvertDecimalToCollapsibleNumberSystem(equivalentSymbolInCollapsibleSystem, outputNumberSystem);
             var paddedNumber = PadWithFirstSymbol(newNumber, iteration, outputNumberSystem);
 
             return paddedNumber;
@@ -91,7 +137,7 @@ namespace Rogero.NumberSystems
             return new Number(numberSystem, newValue);
         }
 
-        private static Number ConvertDecimalToCollapsableNumberSystem(int decimalValue, NumberSystem outputNumberSystem)
+        private static Number ConvertDecimalToCollapsibleNumberSystem(int decimalValue, NumberSystem outputNumberSystem)
         {
             var radix = outputNumberSystem.Radix;
             int number = decimalValue;

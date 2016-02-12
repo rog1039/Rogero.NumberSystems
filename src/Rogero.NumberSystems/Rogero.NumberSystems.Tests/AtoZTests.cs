@@ -12,7 +12,7 @@ namespace Rogero.NumberSystems.Tests
             var range = Enumerable.Range(0, 2000).ToList();
             for (int i = 1; i < range.Count; i++)
             {
-                var alphaValue = Converter.ConvertFromDecimal(i, NumberSystem.AToZ_OneIndex);
+                var alphaValue = NumberConverter.ConvertFromDecimal(i, NumberSystem.AToZ_OneIndex);
                 Console.WriteLine($"{i,3} => {alphaValue}");
             }
         }

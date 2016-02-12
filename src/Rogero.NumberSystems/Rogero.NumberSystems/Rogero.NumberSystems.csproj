@@ -41,7 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="NumberAlphabet.cs" />
-    <Compile Include="Converter.cs" />
+    <Compile Include="NumberConverter.cs" />
     <Compile Include="FirstSymbolType.cs" />
     <Compile Include="Number.cs" />
     <Compile Include="NumberSystem.cs" />

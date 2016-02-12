@@ -74,5 +74,7 @@ namespace Rogero.NumberSystems
             var indexSymbol = FirstSymbolType == FirstSymbolType.Zero ? "0" : "1";
             return $"{NumberAlphabet.FirstSymbol}-{NumberAlphabet.LastSymbol}|{collapseSymbol}{indexSymbol}";
         }
+
+        public NumberSystem InvertFirstSymbolCollapses() => new NumberSystem(NumberAlphabet, FirstSymbolType, !FirstSymbolCollapses);
     }
 }
