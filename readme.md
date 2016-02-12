@@ -1,6 +1,6 @@
 # Overview
 
-## Nuget
+## Installation
 
 Add Package: ```Install-Package Rogero.NumberSystems```  
 Nuget page: https://www.nuget.org/packages/Rogero.NumberSystems/
