@@ -2,7 +2,7 @@
 
 ## Installation
 
-Add Package: ```Install-Package Rogero.NumberSystems```  
+```Install-Package Rogero.NumberSystems```  
 Nuget page: https://www.nuget.org/packages/Rogero.NumberSystems/
 
 ## Types of Number Systems
