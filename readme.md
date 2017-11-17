@@ -61,7 +61,12 @@ Given an alphabet with radix r<sub>n</sub> with length _x_:
 For any length _x_: r<sub>n</sub>  
 ###### For no-collapse systems (AA-style):  
 For any length _x_: Sum[(r<sub>n</sub>)<sup>p</sup>] as p goes from 1..x  
-### 
+
+## Features
+
+So this library allows you to create arbitrary number alphabet. It comes with common ones such as binary, octal, decimal, hexadecimal, alphabet, stadium alphabet, and a few others. You can create an alphabet by simply defining an array of characters that make up the alphabet.
+
+You can then create a number system by taking a number alphabet and then telling the system if that alphabet has a special zero symbol or not and if the first symbol collapses. Once that number system is defined, then you can ask the system to convert a value in one arbitrary number system to a value in another arbitrary number system.
 
 
 
