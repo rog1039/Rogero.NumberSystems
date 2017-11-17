@@ -4,7 +4,6 @@ using System.Linq;
 
 namespace Rogero.NumberSystems
 {
-
     public static class NonCollapsibleToDecimalConverter
     {
         public static int Convert(Number number)

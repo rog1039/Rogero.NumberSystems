@@ -68,6 +68,8 @@
     <Compile Include="AtoZTests.cs" />
     <Compile Include="BinaryTests.cs" />
     <Compile Include="DecimalTests.cs" />
+    <Compile Include="BinCreatorTests.cs" />
+    <Compile Include="ExistingBins.cs" />
     <Compile Include="HexadecimalTests.cs" />
     <Compile Include="OctalTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
