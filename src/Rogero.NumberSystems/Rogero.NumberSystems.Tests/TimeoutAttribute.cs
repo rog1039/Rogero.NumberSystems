@@ -1,20 +1,19 @@
 ﻿using System.Collections;
 
-namespace NCrunch.Framework
+namespace NCrunch.Framework;
+
+public class TimeoutAttribute : System.Attribute
 {
-    public class TimeoutAttribute : System.Attribute
+    private IDictionary _properties;
+
+    public TimeoutAttribute(int timeout)
     {
-        private IDictionary _properties;
+        _properties            = new Hashtable();
+        _properties["Timeout"] = timeout;
+    }
 
-        public TimeoutAttribute(int timeout)
-        {
-            _properties = new Hashtable();
-            _properties["Timeout"] = timeout;
-        }
-
-        public IDictionary Properties
-        {
-            get { return _properties; }
-        }
+    public IDictionary Properties
+    {
+        get { return _properties; }
     }
 }
